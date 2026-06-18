@@ -1110,6 +1110,11 @@
     document.addEventListener('mouseleave', () => {
       tiltFrame.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
     });
+    window.addEventListener('scroll', () => {
+      if (tiltFrame.getBoundingClientRect().bottom < 0) {
+        tiltFrame.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+      }
+    }, { passive: true });
     /* END TILT */
 
     /* END REACTIVE */
