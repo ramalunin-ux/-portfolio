@@ -1048,24 +1048,24 @@
         <p class="contact-sub">Tell me what you're working on and let's see if we're a good fit. I respond within 24 hours.</p>
         <a href="mailto:ramalunin@gmail.com" class="contact-email">ramalunin@gmail.com</a>
       </div>
-      <form class="contact-form">
+      <form class="contact-form" action="https://formspree.io/f/xjgdqjqj" method="POST">
         <div class="form-row">
           <div class="form-field">
             <label>First Name</label>
-            <input type="text" placeholder="John">
+            <input type="text" name="first_name" placeholder="John">
           </div>
           <div class="form-field">
             <label>Last Name</label>
-            <input type="text" placeholder="Smith">
+            <input type="text" name="last_name" placeholder="Smith">
           </div>
         </div>
         <div class="form-field">
           <label>Email</label>
-          <input type="email" placeholder="john@company.com">
+          <input type="email" name="email" placeholder="john@company.com" required>
         </div>
         <div class="form-field">
           <label>Message</label>
-          <textarea rows="5" placeholder="Tell me about your project..."></textarea>
+          <textarea rows="5" name="message" placeholder="Tell me about your project..." required></textarea>
         </div>
         <button type="submit" class="btn-submit">Send message</button>
       </form>
