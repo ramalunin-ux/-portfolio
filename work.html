@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work — Rama Lunin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #F7F2EA;
+      --warm-white: #FAF8F4;
+      --charcoal: #1E1A16;
+      --warm-brown: #2C2318;
+      --gold: #C9963C;
+      --terracotta: #B8724A;
+      --muted: #8A7E74;
+      --light-muted: #C4B9AE;
+      --border: #E8E0D5;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247,242,234,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--charcoal);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--charcoal); }
+    .nav-cta {
+      background: var(--charcoal) !important;
+      color: var(--cream) !important;
+      padding: 10px 24px !important;
+      border-radius: 100px !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.02em !important;
+      text-transform: none !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--warm-brown) !important; color: var(--cream) !important; }
+
+    /* PAGE HERO */
+    .page-hero {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px 60px 60px;
+      text-align: center;
+    }
+    .page-eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 6vw, 72px);
+      font-weight: 600;
+      color: var(--charcoal);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .page-subtitle {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* WORK SECTION */
+    .work-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 60px 60px 80px;
+      border-top: 1px solid var(--border);
+    }
+    .work-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .work-category {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .work-client {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--charcoal);
+      text-align: right;
+    }
+    .work-section-desc {
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--charcoal);
+      max-width: 640px;
+      margin-bottom: 40px;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+    }
+
+    /* VIDEO GRIDS */
+    .video-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .video-grid-mixed {
+      display: grid;
+      grid-template-columns: 1fr 1.78fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .video-grid-mixed-r {
+      display: grid;
+      grid-template-columns: 1.78fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .video-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--charcoal);
+      position: relative;
+    }
+    .video-wrap video,
+    .video-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .video-wrap.portrait { aspect-ratio: 9 / 16; max-height: 560px; }
+    .video-wrap.landscape { aspect-ratio: 16 / 9; }
+    .video-wrap.square { aspect-ratio: 1 / 1; }
+    .video-label {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* LOGO ANIMATION — full-width */
+    .logo-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 60px 60px 80px;
+      border-top: 1px solid var(--border);
+    }
+    .logo-video-wrap {
+      border-radius: 20px;
+      overflow: hidden;
+      background: #1A3FA8;
+      aspect-ratio: 16 / 9;
+      max-height: 560px;
+      margin-top: 40px;
+    }
+    .logo-video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .logo-meta {
+      margin-top: 20px;
+      display: flex;
+      gap: 48px;
+    }
+    .logo-meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .logo-meta-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .logo-meta-value {
+      font-size: 14px;
+      color: var(--charcoal);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--charcoal);
+      padding: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--cream);
+    }
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(247,242,234,0.45);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--cream); }
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(247,242,234,0.3);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      /* NAV */
+      nav { padding: 16px 24px; }
+      .nav-links li:not(:last-child) { display: none; }
+
+      /* PAGE HERO */
+      .page-hero { padding: 56px 24px 36px; }
+      .page-title { font-size: 42px; }
+      .page-subtitle { font-size: 16px; }
+
+      /* WORK SECTIONS */
+      .work-section,
+      .logo-section { padding: 40px 24px 56px; }
+
+      .work-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        margin-bottom: 16px;
+      }
+      .work-client { text-align: left; font-size: 22px; }
+      .work-section-desc { font-size: 17px; margin-bottom: 28px; }
+
+      /* VIDEO GRIDS — all stack to single column */
+      .video-grid-2,
+      .video-grid-mixed,
+      .video-grid-mixed-r { grid-template-columns: 1fr; }
+
+      .video-wrap.portrait { max-height: 420px; }
+
+      /* LUMIMEDS VIDEO — portrait on mobile */
+      .logo-video-wrap {
+        aspect-ratio: 9 / 16;
+        max-height: none;
+      }
+
+      /* LOGO META */
+      .logo-meta { flex-direction: column; gap: 20px; }
+
+      /* FOOTER */
+      footer {
+        flex-direction: column;
+        gap: 20px;
+        padding: 40px 24px;
+        text-align: center;
+      }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+    }
+
+    /* CURSOR — to undo: remove this block + JS block marked CURSOR */
+    @media (pointer: fine) {
+    * { cursor: none !important; }
+    .cursor-dot {
+      position: fixed;
+      top: 0; left: 0;
+      width: 10px; height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+      transition: width 0.25s ease, height 0.25s ease, opacity 0.3s ease;
+    }
+    .cursor-dot.expanded { width: 38px; height: 38px; }
+    } /* end pointer: fine */
+    /* END CURSOR */
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Rama Lunin</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="work.html" class="active">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="mailto:rama.l@lumimeds.com" class="nav-cta">Let's talk</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <p class="page-eyebrow">Work</p>
+    <h1 class="page-title">All projects</h1>
+    <p class="page-subtitle">A selection of work across beauty, personal development, and defence — showcasing range across formats, industries, and platforms.</p>
+  </div>
+
+  <!-- BEAUTY -->
+  <section class="work-section">
+    <div class="work-section-header">
+      <span class="work-category">Beauty</span>
+      <span class="work-client">Glamour NYC</span>
+    </div>
+    <p class="work-section-desc">Product content designed to sell. Two videos built for Glamour NYC's website to showcase their beauty range and drive direct conversions.</p>
+    <div class="video-grid-mixed">
+      <div class="video-wrap portrait">
+        <video muted loop playsinline
+          poster="assets/work/beauty-thumb-portrait.jpg">
+          <source src="assets/work/beauty-reel-portrait.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-wrap landscape">
+        <video muted loop playsinline
+          poster="assets/work/beauty-thumb-jade.jpg">
+          <source src="assets/work/beauty-jade-landscape.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- COACHING -->
+  <section class="work-section">
+    <div class="work-section-header">
+      <span class="work-category">Coaching &amp; Personal Development</span>
+      <span class="work-client">Satvatove</span>
+    </div>
+    <p class="work-section-desc">Real people, real transformation. Seminar films built to show what Satvatove's coaching experience actually feels like from the inside.</p>
+    <div class="video-grid-mixed-r">
+      <div class="video-wrap landscape">
+        <video muted loop playsinline
+          poster="assets/work/satvatove-thumb-landscape.jpg">
+          <source src="assets/work/satvatove-landscape.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-wrap portrait">
+        <video muted loop playsinline
+          poster="assets/work/satvatove-thumb-portrait.jpg">
+          <source src="assets/work/satvatove-portrait.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEFENCE -->
+  <section class="work-section">
+    <div class="work-section-header">
+      <span class="work-category">Defence &amp; Technology</span>
+      <span class="work-client">Spear UAV</span>
+    </div>
+    <p class="work-section-desc">Defence technology, documented. Promo and demo films capturing Spear UAV's products at international exhibitions worldwide.</p>
+    <div class="video-grid-2">
+      <div class="video-wrap landscape">
+        <video muted loop playsinline
+          poster="assets/work/spear-thumb-viper.jpg">
+          <source src="assets/work/spear-viper.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-wrap landscape">
+        <video muted loop playsinline
+          poster="assets/work/spear-thumb-right.jpg">
+          <source src="assets/work/spear-right.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- LUMIMEDS LOGO ANIMATION -->
+  <section class="logo-section">
+    <div class="work-section-header">
+      <span class="work-category">Brand Identity &middot; Motion Design</span>
+      <span class="work-client">LumiMeds</span>
+    </div>
+    <p class="work-section-desc">Custom logo reveal built in After Effects. Particle-based animation with branded motion design.</p>
+    <div class="logo-video-wrap">
+      <video autoplay muted loop playsinline
+        poster="assets/work/lumimeds-logo-thumb.jpg">
+        <source src="assets/work/lumimeds-logo.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="logo-meta">
+      <div class="logo-meta-item">
+        <span class="logo-meta-label">Outcome</span>
+        <span class="logo-meta-value">Built in After Effects as part of the full LumiMeds brand production package.</span>
+      </div>
+      <div class="logo-meta-item">
+        <span class="logo-meta-label">Tools</span>
+        <span class="logo-meta-value">After Effects / Motion graphics / Brand identity</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Rama Lunin</span>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#services">Services</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 Rama Lunin</span>
+  </footer>
+
+  <script>
+    const isTouchDevice = ('ontouchstart' in window) || window.matchMedia('(max-width: 768px)').matches;
+
+    if (!isTouchDevice) {
+      // Desktop: hover to play
+      document.querySelectorAll('.video-wrap').forEach(wrap => {
+        const video = wrap.querySelector('video');
+        if (!video) return;
+        wrap.addEventListener('mouseenter', () => video.play());
+        wrap.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
+      });
+    } else {
+      // Mobile: play when 40% of video scrolls into view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const video = entry.target.querySelector('video');
+          if (!video) return;
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+            video.currentTime = 0;
+          }
+        });
+      }, { threshold: 0.4 });
+
+      document.querySelectorAll('.video-wrap').forEach(wrap => observer.observe(wrap));
+    }
+
+    /* CURSOR — to undo: remove this block + CSS block marked CURSOR */
+    if (window.matchMedia('(pointer: fine)').matches) {
+    const cursorDot = document.createElement('div');
+    cursorDot.className = 'cursor-dot';
+    document.body.appendChild(cursorDot);
+    document.addEventListener('mousemove', e => {
+      cursorDot.style.left = e.clientX + 'px';
+      cursorDot.style.top = e.clientY + 'px';
+    });
+    document.addEventListener('mouseleave', () => { cursorDot.style.opacity = '0'; });
+    document.addEventListener('mouseenter', () => { cursorDot.style.opacity = '1'; });
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursorDot.classList.add('expanded'));
+      el.addEventListener('mouseleave', () => cursorDot.classList.remove('expanded'));
+    });
+    } /* end pointer: fine */
+    /* END CURSOR */
+  </script>
+</body>
+</html>

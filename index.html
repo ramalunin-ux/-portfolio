@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rama Lunin — Video Production Lead & Creative Director</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #F7F2EA;
+      --warm-white: #FAF8F4;
+      --charcoal: #1E1A16;
+      --warm-brown: #2C2318;
+      --gold: #C9963C;
+      --terracotta: #B8724A;
+      --muted: #8A7E74;
+      --light-muted: #C4B9AE;
+      --border: #E8E0D5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(247, 242, 234, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    /* REACTIVE — cursor glow + scroll reveals — to undo: remove this block + the JS block marked REACTIVE at the bottom */
+    .hero { position: relative; overflow: hidden; }
+    .hero > * { position: relative; z-index: 1; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    /* END REACTIVE */
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--charcoal);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--charcoal); }
+    .nav-cta {
+      background: var(--charcoal) !important;
+      color: var(--cream) !important;
+      padding: 10px 24px !important;
+      border-radius: 100px;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      text-transform: none !important;
+      letter-spacing: 0.02em !important;
+      transition: background 0.2s, transform 0.1s !important;
+    }
+    .nav-cta:hover {
+      background: var(--warm-brown) !important;
+      transform: translateY(-1px);
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 100px 60px 80px;
+      gap: 60px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 5.2vw, 78px);
+      font-weight: 600;
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: var(--charcoal);
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--terracotta);
+    }
+    .hero-sub {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 420px;
+      font-weight: 400;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding-top: 8px;
+    }
+    .btn-primary {
+      background: var(--charcoal);
+      color: var(--cream);
+      padding: 14px 32px;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover {
+      background: var(--warm-brown);
+      transform: translateY(-2px);
+    }
+    .btn-ghost {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .btn-ghost:hover { color: var(--charcoal); gap: 12px; }
+
+    /* HERO IMAGE */
+    .hero-image-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 800px;
+    }
+    .hero-image-frame {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      transform-style: preserve-3d;
+      transition: transform 0.3s cubic-bezier(0.03, 0.98, 0.52, 0.99);
+      will-change: transform;
+    }
+    .hero-photo {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      object-position: 55% 20%;
+      border-radius: 220px 220px 100px 100px;
+      display: block;
+      filter: saturate(1.05) brightness(1.02);
+    }
+    .badge {
+      position: absolute;
+      border-radius: 16px;
+      padding: 14px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      box-shadow: 0 8px 32px rgba(30,26,22,0.14);
+    }
+    .badge-light {
+      bottom: 32px;
+      left: -20px;
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+    }
+    .badge-dark {
+      top: 40px;
+      right: -20px;
+      background: var(--charcoal);
+    }
+    .badge-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .badge-light .badge-num { color: var(--charcoal); }
+    .badge-dark .badge-num { color: var(--warm-white); }
+    .badge-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .badge-light .badge-label { color: var(--muted); }
+    .badge-dark .badge-label { color: var(--light-muted); }
+
+    /* TICKER */
+    .ticker {
+      background: var(--charcoal);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-track {
+      display: inline-flex;
+      animation: ticker 35s linear infinite;
+    }
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 36px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light-muted);
+    }
+    .ticker-dot {
+      width: 4px; height: 4px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* SECTIONS */
+    .section { padding: 100px 60px; max-width: 1280px; margin-left: auto; margin-right: auto; }
+
+    .section-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      display: block;
+      width: 20px; height: 1px;
+      background: var(--gold);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4vw, 54px);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 56px;
+    }
+    .section-link {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .section-link:hover { color: var(--charcoal); gap: 12px; }
+
+    /* FEATURED WORK CARD */
+    .work-featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--warm-brown);
+      margin-bottom: 20px;
+      height: 720px;
+    }
+    .work-featured-img {
+      overflow: hidden;
+    }
+    .work-featured-img img,
+    .work-featured-img video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.85;
+      transition: transform 0.6s ease, opacity 0.4s ease;
+    }
+    .work-featured:hover .work-featured-img img,
+    .work-featured:hover .work-featured-img video {
+      transform: scale(1.04);
+      opacity: 1;
+    }
+    .work-featured-body {
+      padding: 52px 52px 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+    .work-featured-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .work-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .work-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--warm-white);
+    }
+    .work-desc {
+      font-size: 14px;
+      line-height: 1.75;
+      color: rgba(247,242,234,0.6);
+    }
+    .work-outcome {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(247,242,234,0.7);
+    }
+    .work-outcome strong {
+      color: var(--warm-white);
+      font-weight: 600;
+    }
+    .work-tools {
+      font-size: 12px;
+      color: rgba(247,242,234,0.35);
+      letter-spacing: 0.04em;
+    }
+    .work-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gold);
+      text-decoration: none;
+      transition: gap 0.2s;
+      padding-top: 4px;
+    }
+    .work-cta:hover { gap: 12px; }
+
+    /* WORK GRID */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .work-card {
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--charcoal);
+      cursor: pointer;
+    }
+    .work-card-img,
+    .work-card-video {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      max-height: 500px;
+      height: auto;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      opacity: 0.82;
+      transition: transform 0.5s ease, opacity 0.3s;
+    }
+    .work-card:hover .work-card-img,
+    .work-card:hover .work-card-video {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+    .work-card-body { padding: 18px 22px 22px; }
+    .work-card-eyebrow {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .work-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--warm-white);
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+    .work-card-desc {
+      font-size: 13px;
+      color: rgba(247,242,234,0.5);
+      line-height: 1.5;
+    }
+
+    /* QUOTE */
+    .quote-section {
+      background: var(--charcoal);
+      padding: 120px 60px;
+      text-align: center;
+    }
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 4.8vw, 68px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--warm-white);
+      line-height: 1.25;
+      max-width: 880px;
+      margin: 0 auto 32px;
+      letter-spacing: -0.02em;
+    }
+    .quote-text em { color: var(--gold); }
+    .quote-attr {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ABOUT */
+    .about-card {
+      background: var(--warm-white);
+      border-radius: 28px;
+      padding: 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-text { display: flex; flex-direction: column; gap: 22px; }
+    .about-body {
+      font-size: 17px;
+      line-height: 1.78;
+      color: var(--muted);
+    }
+    .about-body strong { color: var(--charcoal); font-weight: 500; }
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 6px;
+    }
+    .tag {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      color: var(--charcoal);
+      padding: 7px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+    }
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      height: auto;
+      object-fit: cover;
+      object-position: 35% 18%;
+      border-radius: 50% 50% 16px 16px / 30% 30% 16px 16px;
+      display: block;
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+    .service-item {
+      background: var(--cream);
+      padding: 42px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: background 0.2s;
+    }
+    .service-item:hover { background: var(--warm-white); }
+    .service-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--light-muted);
+      line-height: 1;
+    }
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--charcoal);
+      line-height: 1.2;
+    }
+    .service-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* STATS */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      margin: 0 60px;
+    }
+    .stat-item {
+      background: var(--cream);
+      padding: 60px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 72px;
+      font-weight: 600;
+      color: var(--charcoal);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .stat-label {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.45;
+      max-width: 160px;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-left { display: flex; flex-direction: column; gap: 20px; }
+    .contact-sub {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 380px;
+    }
+    .contact-email {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-email:hover { color: var(--charcoal); }
+    .contact-form { display: flex; flex-direction: column; gap: 14px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-field { display: flex; flex-direction: column; gap: 7px; }
+    .form-field label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-field input,
+    .form-field textarea {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--charcoal);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus { border-color: var(--gold); }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: var(--light-muted); }
+    .btn-submit {
+      background: var(--charcoal);
+      color: var(--cream);
+      border: none;
+      padding: 15px 34px;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.02em;
+    }
+    .btn-submit:hover {
+      background: var(--warm-brown);
+      transform: translateY(-2px);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+    .footer-links { display: flex; gap: 28px; list-style: none; }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--charcoal); }
+    .footer-copy { font-size: 12px; color: var(--light-muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .work-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      /* NAV — keep logo + CTA, hide middle links */
+      nav { padding: 16px 24px; }
+      .nav-links li:not(:last-child) { display: none; }
+
+      /* HERO */
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 80px 24px 48px;
+        gap: 36px;
+      }
+      .hero-image-wrap { order: -1; }
+      .hero-image-frame { max-width: 300px; margin: 0 auto; }
+      .hero-photo { height: 280px; }
+      .badge-light { left: 0; }
+      .badge-dark { right: 0; }
+      .hero-actions { flex-wrap: wrap; gap: 16px; }
+
+      /* SECTIONS */
+      .section { padding: 56px 24px; }
+      .section-header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+        margin-bottom: 32px;
+      }
+
+      /* WORK FEATURED */
+      .work-featured {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .work-featured-img { height: auto; aspect-ratio: 9 / 16; }
+      .work-featured-body { padding: 28px 24px 32px; }
+
+      /* WORK GRID */
+      .work-grid { grid-template-columns: 1fr; }
+
+      /* QUOTE */
+      .quote-section { padding: 72px 24px; }
+
+      /* ABOUT */
+      .about-card {
+        grid-template-columns: 1fr;
+        padding: 36px 24px;
+        gap: 36px;
+      }
+      .about-photo { max-width: 280px; margin: 0 auto; display: block; }
+
+      /* SERVICES */
+      .services-grid { grid-template-columns: 1fr; }
+
+      /* STATS */
+      .stats-strip {
+        grid-template-columns: 1fr;
+        margin: 0 24px;
+      }
+      .stat-item { padding: 40px 32px; }
+
+      /* CONTACT */
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .form-row { grid-template-columns: 1fr; }
+      .btn-submit { width: 100%; text-align: center; }
+
+      /* FOOTER */
+      footer {
+        flex-direction: column;
+        gap: 18px;
+        padding: 28px 24px;
+        text-align: center;
+      }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+    }
+
+    /* HERO ENTRANCE + PARALLAX — to undo: remove this block + JS block marked HERO ENTRANCE + PARALLAX */
+    .hero-tag, .hero-headline, .hero-sub, .hero-actions {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .hero-tag.in, .hero-headline.in, .hero-sub.in, .hero-actions.in {
+      opacity: 1;
+      transform: none;
+    }
+    /* END HERO ENTRANCE + PARALLAX */
+
+    /* CURSOR + MAGNETIC — to undo: remove this block + the JS block marked CURSOR + MAGNETIC */
+    @media (pointer: fine) {
+    * { cursor: none !important; }
+    .cursor-dot {
+      position: fixed;
+      top: 0; left: 0;
+      width: 10px; height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+      transition: width 0.25s ease, height 0.25s ease, opacity 0.3s ease;
+    }
+    .cursor-dot.expanded {
+      width: 38px;
+      height: 38px;
+    }
+    } /* end pointer: fine */
+    /* END CURSOR + MAGNETIC */
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Rama Lunin</a>
+    <ul class="nav-links">
+      <li><a href="work.html">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact" class="nav-cta">Let's talk</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-tag">Video Production Lead &amp; Creative Director</span>
+      <h1 class="hero-headline">
+        Content that<br>stops the scroll.<br>
+        <em>Productions that<br>drive results.</em>
+      </h1>
+      <p class="hero-sub">
+        End-to-end video production for performance brands: strategy, creative direction, talent coordination, and content built to convert.
+      </p>
+      <div class="hero-actions">
+        <a href="work.html" class="btn-primary">View Work</a>
+        <a href="#contact" class="btn-ghost">Let's talk &nbsp;→</a>
+      </div>
+    </div>
+    <div class="hero-image-wrap">
+      <div class="hero-image-frame">
+        <img class="hero-photo"
+             src="assets/homepage/profile-beach.png"
+             alt="Rama Lunin">
+        <div class="badge badge-light">
+          <span class="badge-num">600+</span>
+          <span class="badge-label">Projects delivered</span>
+        </div>
+        <div class="badge badge-dark">
+          <span class="badge-num">7+</span>
+          <span class="badge-label">Years experience</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="ticker-dot"></span>UGC Ad Editing</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>AI Production Pipelines</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Organic Social Content</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Brand Campaign Editing</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Creative Direction</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Motion Design</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Meta &amp; TikTok Ads</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>After Effects</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>UGC Ad Editing</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>AI Production Pipelines</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Organic Social Content</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Brand Campaign Editing</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Creative Direction</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Motion Design</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Meta &amp; TikTok Ads</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>After Effects</span>
+    </div>
+  </div>
+
+  <!-- FEATURED WORK -->
+  <section class="section" id="work">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">Selected work</div>
+        <h2 class="section-title">Projects that moved<br>the needle</h2>
+      </div>
+      <a href="work.html" class="section-link">See all work &nbsp;→</a>
+    </div>
+
+    <div class="work-featured">
+      <div class="work-featured-img">
+        <video autoplay muted loop playsinline>
+          <source src="assets/homepage/lumi-ugc.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="work-featured-body">
+        <span class="work-eyebrow">LumiMeds · UGC Ads &amp; Organic Social</span>
+        <div class="work-featured-content">
+          <h3 class="work-title">Helping a telehealth brand scale video production through AI-powered workflows</h3>
+          <p class="work-desc">LumiMeds needed to produce high-volume social content at a pace that traditional production couldn't sustain. I built the entire operation from the ground up: casting creators, assigning scripts, managing production workflows, and editing over 600 videos in 6 months. I independently developed AI production agents using Claude Code to automate footage organization, team communication, and post-production handoffs across Slack, Frame.io, and cloud storage. The result was a fully scalable content engine that kept growing without adding headcount.</p>
+          <p class="work-outcome"><strong>Outcome:</strong> 600+ videos delivered in 6 months across paid and organic social, with a fully automated production pipeline built from scratch.</p>
+          <p class="work-tools">Claude Code / Adobe Premiere Pro / After Effects / Higgsfield</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-grid">
+      <div class="work-card">
+        <video class="work-card-video" muted loop playsinline
+          poster="assets/homepage/trip-thumb.jpg">
+          <source src="assets/homepage/trip-ugc.mp4" type="video/mp4">
+        </video>
+        <div class="work-card-body">
+          <div class="work-card-eyebrow">TRIP</div>
+          <div class="work-card-title">UGC ads</div>
+          <div class="work-card-desc">Drove strong retention and engagement in paid social</div>
+        </div>
+      </div>
+      <div class="work-card">
+        <video class="work-card-video" muted loop playsinline
+          poster="assets/homepage/medi-thumb.jpg">
+          <source src="assets/homepage/medi-loupes.mp4" type="video/mp4">
+        </video>
+        <div class="work-card-body">
+          <div class="work-card-eyebrow">Medi Loupes</div>
+          <div class="work-card-title">Brand campaign</div>
+          <div class="work-card-desc">Content contributed to company acquisition</div>
+        </div>
+      </div>
+      <div class="work-card">
+        <video class="work-card-video" muted loop playsinline
+          poster="assets/homepage/sj-thumb.jpg">
+          <source src="assets/homepage/sj-insurance.mp4" type="video/mp4">
+        </video>
+        <div class="work-card-body">
+          <div class="work-card-eyebrow">SJ Insurance Group</div>
+          <div class="work-card-title">Promotional content for Meta</div>
+          <div class="work-card-desc">Generated strong engagement and drove website traffic</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <div class="quote-section">
+    <p class="quote-text">
+      "Every project starts with one question: will this make someone stop watching <em>everything else?</em>"
+    </p>
+    <span class="quote-attr">— Rama Lunin</span>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="about-card">
+      <div class="about-text">
+        <div class="section-eyebrow">About</div>
+        <h2 class="section-title">A creative director<br>who builds the production<br>behind the content.</h2>
+        <p class="about-body">
+          I'm Rama, a video production lead and creative director specializing in performance content. I run productions end-to-end: strategy, scripting, talent coordination, and post-production.
+        </p>
+        <p class="about-body">
+          I specialize in performance content for <strong>e-commerce, health and wellness, fashion, beauty, and food brands.</strong> From UGC-style ads to full brand campaigns, with the same obsession with hooks, pacing, and storytelling in every frame.
+        </p>
+        <p class="about-body">
+          What sets me apart is the infrastructure behind the content. I independently build AI production pipelines that automate footage organization, team communication, casting, script assignment, and post-production handoffs. <strong>The kind of systems that let a small team produce at a scale that shouldn't be possible.</strong>
+        </p>
+        <p class="about-body">
+          Beyond client work, I run a YouTube channel with over <strong>120K subscribers</strong>. Proof that I don't just produce content, I know how to build an audience with it.
+        </p>
+        <div class="about-tags">
+          <span class="tag">After Effects</span>
+          <span class="tag">Premiere Pro</span>
+          <span class="tag">Claude Code</span>
+          <span class="tag">Meta Ads</span>
+          <span class="tag">TikTok</span>
+          <span class="tag">UGC Production</span>
+          <span class="tag">AI Workflows</span>
+        </div>
+      </div>
+      <img class="about-photo"
+           src="assets/homepage/profile-colorado.png"
+           alt="Rama Lunin">
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">What I do</div>
+        <h2 class="section-title">Services</h2>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="service-item">
+        <span class="service-num">01</span>
+        <h3 class="service-title">Creative Direction</h3>
+        <p class="service-desc">From concept and scripting to talent briefing and shot lists. End-to-end creative leadership with a clear strategy behind every piece.</p>
+      </div>
+      <div class="service-item">
+        <span class="service-num">02</span>
+        <h3 class="service-title">UGC Ad Production</h3>
+        <p class="service-desc">Hook-driven ads built for broad audiences. Tight pacing, native product integration, and CTAs designed to convert on Meta and TikTok.</p>
+      </div>
+      <div class="service-item">
+        <span class="service-num">03</span>
+        <h3 class="service-title">Brand Campaigns</h3>
+        <p class="service-desc">Polished, story-led content that builds brand equity and works across multiple channels and formats.</p>
+      </div>
+      <div class="service-item">
+        <span class="service-num">04</span>
+        <h3 class="service-title">Organic Social Content</h3>
+        <p class="service-desc">Reels, TikToks, and Shorts produced to feel native to the platform, built to hold attention and grow your brand without a media budget.</p>
+      </div>
+      <div class="service-item">
+        <span class="service-num">05</span>
+        <h3 class="service-title">Creative Iterations &amp; Ad Variants</h3>
+        <p class="service-desc">Multiple cuts from the same footage: different hooks, formats, and pacing, so you can test fast and scale what works.</p>
+      </div>
+      <div class="service-item">
+        <span class="service-num">06</span>
+        <h3 class="service-title">On-Set Production</h3>
+        <p class="service-desc">On-set production with the final cut already in mind. No disconnect between what gets filmed and what gets delivered.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <span class="stat-num">7+</span>
+      <span class="stat-label">Years leading video productions for brands</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">600+</span>
+      <span class="stat-label">Projects across social, brand films &amp; commercial content</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">120K+</span>
+      <span class="stat-label">YouTube subscribers — built from scratch</span>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <div class="section-eyebrow">Get in touch</div>
+        <h2 class="section-title">Got a project<br>in mind?</h2>
+        <p class="contact-sub">Tell me what you're working on and let's see if we're a good fit. I respond within 24 hours.</p>
+        <a href="mailto:ramalunin@gmail.com" class="contact-email">ramalunin@gmail.com</a>
+      </div>
+      <form class="contact-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label>First Name</label>
+            <input type="text" placeholder="John">
+          </div>
+          <div class="form-field">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" placeholder="john@company.com">
+        </div>
+        <div class="form-field">
+          <label>Message</label>
+          <textarea rows="5" placeholder="Tell me about your project..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Rama Lunin</span>
+    <ul class="footer-links">
+      <li><a href="work.html">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#">LinkedIn</a></li>
+    </ul>
+    <span class="footer-copy">© 2025 Rama Lunin</span>
+  </footer>
+
+  <script>
+    /* REACTIVE — cursor glow + scroll reveals — to undo: remove this block */
+
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.section-header, .work-featured, .work-card, .about-grid, .services-grid, .contact-wrap').forEach((el, i) => {
+      el.classList.add('reveal');
+      el.style.transitionDelay = (i % 3) * 0.08 + 's';
+      revealObs.observe(el);
+    });
+
+    /* TILT — to undo: remove this block + perspective/transform-style/transition from .hero-image-wrap/.hero-image-frame CSS */
+    const tiltFrame = document.querySelector('.hero-image-frame');
+    document.addEventListener('mousemove', e => {
+      const r = tiltFrame.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const ox = (e.clientX - cx) / (window.innerWidth / 2);
+      const oy = (e.clientY - cy) / (window.innerHeight / 2);
+      tiltFrame.style.transform = `rotateX(${oy * -8}deg) rotateY(${ox * 8}deg) scale(1.01)`;
+    });
+    document.addEventListener('mouseleave', () => {
+      tiltFrame.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+    /* END TILT */
+
+    /* END REACTIVE */
+
+
+    /* ROLLING COUNTER — to undo: remove this block */
+    function buildCountUp(el) {
+      const raw = el.textContent.trim();
+      const target = parseInt(raw, 10);
+      const suffix = raw.replace(/^\d+/, '');
+      el.textContent = '0' + suffix;
+      return () => {
+        const duration = target <= 20 ? 350 : 2800;
+        const start = performance.now();
+        (function tick(now) {
+          const t = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.floor(eased * target) + suffix;
+          if (t < 1) requestAnimationFrame(tick);
+        })(start);
+      };
+    }
+
+    const counterObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target._roll?.(); counterObs.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.badge-light .badge-num, .badge-dark .badge-num, .stat-num').forEach(el => {
+      el._roll = buildCountUp(el);
+      counterObs.observe(el);
+    });
+    /* END ROLLING COUNTER */
+
+    /* HERO ENTRANCE + PARALLAX — to undo: remove this block + CSS block marked HERO ENTRANCE + PARALLAX */
+    ['.hero-tag', '.hero-headline', '.hero-sub', '.hero-actions'].forEach((sel, i) => {
+      const el = document.querySelector(sel);
+      if (el) setTimeout(() => el.classList.add('in'), i * 170);
+    });
+
+    const heroImgWrap = document.querySelector('.hero-image-wrap');
+    window.addEventListener('scroll', () => {
+      heroImgWrap.style.transform = `translateY(${window.scrollY * 0.15}px)`;
+    }, { passive: true });
+    /* END HERO ENTRANCE + PARALLAX */
+
+    /* CURSOR + MAGNETIC — to undo: remove this block + CSS block marked CURSOR + MAGNETIC */
+    if (window.matchMedia('(pointer: fine)').matches) {
+    const cursorDot = document.createElement('div');
+    cursorDot.className = 'cursor-dot';
+    document.body.appendChild(cursorDot);
+
+    document.addEventListener('mousemove', e => {
+      cursorDot.style.left = e.clientX + 'px';
+      cursorDot.style.top = e.clientY + 'px';
+    });
+    document.addEventListener('mouseleave', () => { cursorDot.style.opacity = '0'; });
+    document.addEventListener('mouseenter', () => { cursorDot.style.opacity = '1'; });
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursorDot.classList.add('expanded'));
+      el.addEventListener('mouseleave', () => cursorDot.classList.remove('expanded'));
+    });
+
+    document.querySelectorAll('.btn-primary, .nav-cta').forEach(btn => {
+      btn.style.transition = 'background 0.2s, transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        const dx = (e.clientX - (r.left + r.width / 2)) * 0.35;
+        const dy = (e.clientY - (r.top + r.height / 2)) * 0.35;
+        btn.style.transform = `translate(${dx}px, ${dy}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translate(0px, 0px)';
+      });
+    });
+    } /* end pointer: fine */
+    /* END CURSOR + MAGNETIC */
+
+    const isTouchDevice = ('ontouchstart' in window) || window.matchMedia('(max-width: 768px)').matches;
+
+    if (!isTouchDevice) {
+      // Desktop: hover to play
+      document.querySelectorAll('.work-card').forEach(card => {
+        const video = card.querySelector('.work-card-video');
+        if (!video) return;
+        card.addEventListener('mouseenter', () => video.play());
+        card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
+      });
+    } else {
+      // Mobile: play when 40% of card scrolls into view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const video = entry.target.querySelector('.work-card-video');
+          if (!video) return;
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+            video.currentTime = 0;
+          }
+        });
+      }, { threshold: 0.4 });
+
+      document.querySelectorAll('.work-card').forEach(card => observer.observe(card));
+    }
+  </script>
+</body>
+</html>
