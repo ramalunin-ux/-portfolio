@@ -942,7 +942,7 @@
   <!-- QUOTE -->
   <div class="quote-section">
     <p class="quote-text">
-      "Every project starts with one question: will this make someone stop watching <em>everything else?</em>&thinsp;"
+      "Every project starts with one question: will this make someone stop watching <em>everything else?</em>"
     </p>
     <span class="quote-attr">— Rama Lunin</span>
   </div>
@@ -1091,7 +1091,7 @@
     const revealObs = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });
     }, { threshold: 0.12 });
-    document.querySelectorAll('.section-header, .work-featured, .work-card, .about-grid, .services-grid, .contact-wrap').forEach((el, i) => {
+    document.querySelectorAll('.section-header, .work-featured, .work-card, .about-grid, .services-grid, .contact-wrap, .quote-text, .quote-attr').forEach((el, i) => {
       el.classList.add('reveal');
       el.style.transitionDelay = (i % 3) * 0.08 + 's';
       revealObs.observe(el);
